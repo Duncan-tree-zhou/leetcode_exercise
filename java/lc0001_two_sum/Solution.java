@@ -1,7 +1,6 @@
-package lc001_two_sum;
+package lc0001_two_sum;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
