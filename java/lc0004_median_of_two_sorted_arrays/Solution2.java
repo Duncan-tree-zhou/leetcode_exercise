@@ -33,21 +33,40 @@ public class Solution2 {
     }
 
     int n = n1 + n2;
-    if (n%2 != 0) {
-      return findKInSortedArrays(nums1, 0, nums2, 0, n/2);
+    if ((n&1) == 1) {
+      return findKInSortedArrays(nums1, 0, nums2, 0, n/2 + 1);
     } else {
-      return (findKInSortedArrays(nums1, 0, nums2, 0, n/2) + findKInSortedArrays(nums1, 0, nums2, 0, n/2+1)) / 2
+      return (findKInSortedArrays(nums1, 0, nums2, 0, n/2) + findKInSortedArrays(nums1, 0, nums2, 0, n/2 + 1)) / 2.0;
     }
   }
 
   public static double findKInSortedArrays(int[] nums1, int n1start, int[] nums2, int n2start, int k) {
+    if (n1start >= nums1.length)
+      return nums2[n2start + k - 1];
+    if (n2start >= nums2.length)
+      return nums1[n1start + k - 1];
 
-    return -1;
+    if (k == 1)
+      return nums1[n1start] <= nums2[n2start] ? nums1[n1start] : nums2[n2start];
+
+    int n1_mid = Integer.MAX_VALUE;
+    int n2_mid = Integer.MAX_VALUE;
+
+    if (n1start + k/2 - 1 < nums1.length)
+      n1_mid = nums1[n1start + k/2 - 1];
+    if (n2start + k/2 - 1 < nums2.length)
+      n2_mid = nums2[n2start + k/2 - 1];
+
+    if( n1_mid < n2_mid) {
+      return findKInSortedArrays(nums1, n1start + k/2, nums2, n2start, k - k/2);
+    } else {
+      return findKInSortedArrays(nums1, n1start, nums2, n2start + k/2, k - k/2);
+    }
   }
 
   public static double findMedianInOneSortedArray(int[] nums) {
-    if (nums.length%2 == 0) {
-      return (nums[nums.length/2 - 1] + nums[nums.length/2]) / 2;
+    if ((nums.length&1) == 0) {
+      return (nums[nums.length/2 - 1] + nums[nums.length/2]) / 2.0;
     } else {
       return nums[nums.length/2];
     }
