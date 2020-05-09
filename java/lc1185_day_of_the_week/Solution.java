@@ -24,6 +24,11 @@ public class Solution {
     }
   }
 
+  int leapYear = 366;
+  int commonYear = 356;
+
+
+
   public static String dayOfTheWeek(int day, int month, int year) {
     return "";
   }
